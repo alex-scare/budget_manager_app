@@ -1,27 +1,43 @@
 import 'dart:io';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:isar/isar.dart';
 import 'package:budget_manager_app/services/dev_logger/dev_logger.dart';
 import 'package:budget_manager_app/services/file_system/file_system_service.dart';
+import 'package:budget_manager_app/shared/models/account.dart';
+import 'package:budget_manager_app/shared/models/category.dart';
+import 'package:budget_manager_app/shared/models/payee.dart';
+import 'package:budget_manager_app/shared/models/transaction.dart';
+import 'package:isar/isar.dart';
 
 final _log = DevLogger('isar');
 const isarDirName = 'isar';
 
 const List<CollectionSchema> _isarSchemas = [
-  // place your schemas here
+  AccountSchema,
+  CategorySchema,
+  PayeeSchema,
+  TransactionSchema,
 ];
 
-final FutureProvider<Isar> isarPod = FutureProvider((ref) async {
-  final dir = await FileSystemService.getDocumentsDirectory();
-  final isarDir = Directory('${dir.path}/$isarDirName');
-
-  if (!isarDir.existsSync()) {
-    isarDir.createSync();
+class IsarService {
+  // singleton boilerplate
+  static final IsarService _singleton = IsarService._internal();
+  factory IsarService() => _singleton;
+  IsarService._internal() {
+    isar = _initIsar();
   }
+  // end singleton boilerplate
 
-  final isar = Isar.openSync(_isarSchemas, directory: isarDir.path);
+  late Future<Isar> isar;
 
-  _log.info('service started');
-  return isar;
-});
+  Future<Isar> _initIsar() async {
+    final dir = await FileSystemService.getDocumentsDirectory();
+    final isarDir = Directory('${dir.path}/$isarDirName');
+
+    if (!isarDir.existsSync()) {
+      isarDir.createSync();
+    }
+
+    _log.info('service started');
+    return Isar.openSync(_isarSchemas, directory: isarDir.path);
+  }
+}
