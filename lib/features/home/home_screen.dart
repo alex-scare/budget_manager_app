@@ -1,6 +1,6 @@
+import 'package:budget_manager_app/services/i18n/locale_key.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:template_app/services/i18n/locale_key.g.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(LocaleKey.featuresHomePageTitle).tr(),
       ),
-      body: const Text(LocaleKey.featuresHomePageTitle).tr(),
+      body: const Text('geello'),
     );
   }
 }

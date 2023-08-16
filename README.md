@@ -7,7 +7,7 @@ Template with basic boilerplate code for Flutter apps
 Complete steps below for easily start coding your own app
 
 0. fork this repo
-1. replace all `template_app` with your `app_name` using IDE tools
+1. replace all `budget_manager_app` with your `app_name` using IDE tools
 2. add all tokens if your need
    1. `goggle_api_key.json` - google clouds service key. used for translating your app localization texts.
 

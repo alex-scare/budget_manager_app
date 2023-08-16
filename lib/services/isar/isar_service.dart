@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:isar/isar.dart';
-import 'package:template_app/services/dev_logger/dev_logger.dart';
-import 'package:template_app/services/file_system/file_system_service.dart';
+import 'package:budget_manager_app/services/dev_logger/dev_logger.dart';
+import 'package:budget_manager_app/services/file_system/file_system_service.dart';
 
 final _log = DevLogger('isar');
 const isarDirName = 'isar';

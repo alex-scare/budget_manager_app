@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:template_app/core/navigation/app_navigation.dart';
-import 'package:template_app/core/theme/theme.dart';
-import 'package:template_app/features/app/global_error_handler.dart';
-import 'package:template_app/features/app/global_loading_handler.dart';
-import 'package:template_app/services/dev_logger/dev_logger.dart';
+import 'package:budget_manager_app/core/navigation/app_navigation.dart';
+import 'package:budget_manager_app/core/theme/theme.dart';
+import 'package:budget_manager_app/features/app/global_error_handler.dart';
+import 'package:budget_manager_app/features/app/global_loading_handler.dart';
+import 'package:budget_manager_app/services/dev_logger/dev_logger.dart';
 
 class App extends HookWidget {
   const App({super.key});
@@ -24,7 +24,7 @@ class App extends HookWidget {
     );
 
     return MaterialApp.router(
-      title: 'Template app',
+      title: 'Budget app',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       // darkTheme: AppTheme.dark,

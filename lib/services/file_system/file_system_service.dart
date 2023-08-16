@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:template_app/services/dev_logger/dev_logger.dart';
+import 'package:budget_manager_app/services/dev_logger/dev_logger.dart';
 
 class FileSystemService {
   static final _log = DevLogger('FileSystemService');

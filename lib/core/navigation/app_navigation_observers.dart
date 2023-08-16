@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:template_app/services/dev_logger/dev_logger.dart';
+import 'package:budget_manager_app/services/dev_logger/dev_logger.dart';
 
 class AppNavigationObserver extends NavigatorObserver {
   final _log = DevLogger('navigation');

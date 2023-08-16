@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:template_app/services/dev_logger/dev_logger.dart';
+import 'package:budget_manager_app/services/dev_logger/dev_logger.dart';
 
 class I18nService {
   static final _log = DevLogger('i18n');

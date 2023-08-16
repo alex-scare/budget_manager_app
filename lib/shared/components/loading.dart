@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lottie/lottie.dart';
-import 'package:template_app/shared/helpers/asset_lottie_path.dart';
+import 'package:budget_manager_app/shared/helpers/asset_lottie_path.dart';
 
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);

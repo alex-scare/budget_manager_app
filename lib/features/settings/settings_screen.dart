@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:template_app/services/i18n/locale_key.g.dart';
+import 'package:budget_manager_app/services/i18n/locale_key.g.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

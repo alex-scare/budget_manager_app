@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:csv/csv.dart';
-import 'package:template_app/shared/extensions/list.dart';
+import 'package:budget_manager_app/shared/extensions/list.dart';
 
 import 'models/locale_csv_entity.dart';
 import 'services/locale_gcloud.dart';

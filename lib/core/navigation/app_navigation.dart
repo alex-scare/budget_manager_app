@@ -1,10 +1,10 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:template_app/core/navigation/app_route.dart';
-import 'package:template_app/core/navigation/tab_navigation_scaffold.dart';
-import 'package:template_app/features/home/home_screen.dart';
-import 'package:template_app/features/settings/settings_screen.dart';
+import 'package:budget_manager_app/core/navigation/app_route.dart';
+import 'package:budget_manager_app/core/navigation/tab_navigation_scaffold.dart';
+import 'package:budget_manager_app/features/home/home_screen.dart';
+import 'package:budget_manager_app/features/settings/settings_screen.dart';
 
 enum RouteName {
   initial,

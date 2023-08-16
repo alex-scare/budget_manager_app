@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:template_app/core/navigation/app_navigation.dart';
-import 'package:template_app/services/dev_logger/dev_logger.dart';
+import 'package:budget_manager_app/core/navigation/app_navigation.dart';
+import 'package:budget_manager_app/services/dev_logger/dev_logger.dart';
 
 class GlobalErrorHandler extends StatefulWidget {
   const GlobalErrorHandler({
