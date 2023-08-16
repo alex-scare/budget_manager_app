@@ -32,8 +32,14 @@ const AccountSchema = CollectionSchema(
       name: r'description',
       type: IsarType.string,
     ),
-    r'name': PropertySchema(
+    r'icon': PropertySchema(
       id: 3,
+      name: r'icon',
+      type: IsarType.string,
+      enumMap: _AccounticonEnumValueMap,
+    ),
+    r'name': PropertySchema(
+      id: 4,
       name: r'name',
       type: IsarType.string,
     )
@@ -60,6 +66,7 @@ int _accountEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.currency.length * 3;
   bytesCount += 3 + object.description.length * 3;
+  bytesCount += 3 + object.icon.name.length * 3;
   bytesCount += 3 + object.name.length * 3;
   return bytesCount;
 }
@@ -73,7 +80,8 @@ void _accountSerialize(
   writer.writeDouble(offsets[0], object.balance);
   writer.writeString(offsets[1], object.currency);
   writer.writeString(offsets[2], object.description);
-  writer.writeString(offsets[3], object.name);
+  writer.writeString(offsets[3], object.icon.name);
+  writer.writeString(offsets[4], object.name);
 }
 
 Account _accountDeserialize(
@@ -86,7 +94,9 @@ Account _accountDeserialize(
     balance: reader.readDoubleOrNull(offsets[0]) ?? 0,
     currency: reader.readString(offsets[1]),
     description: reader.readStringOrNull(offsets[2]) ?? '',
-    name: reader.readString(offsets[3]),
+    icon: _AccounticonValueEnumMap[reader.readStringOrNull(offsets[3])] ??
+        AppIcon.money,
+    name: reader.readString(offsets[4]),
   );
   object.id = id;
   return object;
@@ -106,11 +116,47 @@ P _accountDeserializeProp<P>(
     case 2:
       return (reader.readStringOrNull(offset) ?? '') as P;
     case 3:
+      return (_AccounticonValueEnumMap[reader.readStringOrNull(offset)] ??
+          AppIcon.money) as P;
+    case 4:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
+
+const _AccounticonEnumValueMap = {
+  r'money': r'money',
+  r'creditCard': r'creditCard',
+  r'attachMoney': r'attachMoney',
+  r'home': r'home',
+  r'car': r'car',
+  r'food': r'food',
+  r'shopping': r'shopping',
+  r'gift': r'gift',
+  r'health': r'health',
+  r'education': r'education',
+  r'entertainment': r'entertainment',
+  r'travel': r'travel',
+  r'other': r'other',
+  r'favorite': r'favorite',
+};
+const _AccounticonValueEnumMap = {
+  r'money': AppIcon.money,
+  r'creditCard': AppIcon.creditCard,
+  r'attachMoney': AppIcon.attachMoney,
+  r'home': AppIcon.home,
+  r'car': AppIcon.car,
+  r'food': AppIcon.food,
+  r'shopping': AppIcon.shopping,
+  r'gift': AppIcon.gift,
+  r'health': AppIcon.health,
+  r'education': AppIcon.education,
+  r'entertainment': AppIcon.entertainment,
+  r'travel': AppIcon.travel,
+  r'other': AppIcon.other,
+  r'favorite': AppIcon.favorite,
+};
 
 Id _accountGetId(Account object) {
   return object.id;
@@ -524,6 +570,136 @@ extension AccountQueryFilter
     });
   }
 
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconEqualTo(
+    AppIcon value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'icon',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconGreaterThan(
+    AppIcon value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'icon',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconLessThan(
+    AppIcon value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'icon',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconBetween(
+    AppIcon lower,
+    AppIcon upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'icon',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'icon',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'icon',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'icon',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'icon',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'icon',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> iconIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'icon',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -750,6 +926,18 @@ extension AccountQuerySortBy on QueryBuilder<Account, Account, QSortBy> {
     });
   }
 
+  QueryBuilder<Account, Account, QAfterSortBy> sortByIcon() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'icon', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByIconDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'icon', Sort.desc);
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -801,6 +989,18 @@ extension AccountQuerySortThenBy
     });
   }
 
+  QueryBuilder<Account, Account, QAfterSortBy> thenByIcon() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'icon', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByIconDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'icon', Sort.desc);
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -848,6 +1048,13 @@ extension AccountQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Account, Account, QDistinct> distinctByIcon(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'icon', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Account, Account, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -879,6 +1086,12 @@ extension AccountQueryProperty
   QueryBuilder<Account, String, QQueryOperations> descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
+    });
+  }
+
+  QueryBuilder<Account, AppIcon, QQueryOperations> iconProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'icon');
     });
   }
 
