@@ -52,13 +52,10 @@ class FileSystemService {
     }
   }
 
-  static Future<File?> pickFile({
-    required List<String> allowedExtensions,
-  }) async {
+  static Future<File?> pickFile() async {
     try {
       final result = await FilePicker.platform.pickFiles(
         type: FileType.any,
-        // allowedExtensions: allowedExtensions,
       );
       if (result != null) {
         final file = File(result.files.single.path!);
@@ -66,8 +63,6 @@ class FileSystemService {
       }
     } on PlatformException catch (e, stack) {
       _log.error('platform error: file pick error', e, stack);
-    } catch (error) {
-      _log.error('unknown error: file pick error', error, StackTrace.current);
     }
     return null;
   }

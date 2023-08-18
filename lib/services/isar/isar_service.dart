@@ -67,7 +67,7 @@ class IsarService {
   }
 
   Future<void> restoreFromFile() async {
-    final file = await FileSystemService.pickFile(allowedExtensions: ['isar']);
+    final file = await FileSystemService.pickFile();
 
     if (file == null) return;
 
