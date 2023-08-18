@@ -4,6 +4,7 @@ import 'package:budget_manager_app/core/navigation/app_route.dart';
 import 'package:budget_manager_app/core/navigation/tab_navigation_scaffold.dart';
 import 'package:budget_manager_app/features/home/home_screen.dart';
 import 'package:budget_manager_app/features/settings/settings_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,6 +13,12 @@ enum RouteName {
   home,
   settings,
   ;
+
+  String get path => switch (this) {
+        initial => '/',
+        home => '/home',
+        settings => '/settings',
+      };
 }
 
 class AppNavigation {
@@ -29,10 +36,10 @@ class AppNavigation {
 
   GoRouter _createRouter() {
     return GoRouter(
-      debugLogDiagnostics: true,
+      debugLogDiagnostics: kDebugMode,
       navigatorKey: globalRouteKey,
       observers: [AppNavigationObserver()],
-      initialLocation: '/',
+      initialLocation: RouteName.initial.path,
       routes: [
         ...routes.map((route) => route.route(globalRouteKey)).toList(),
         ShellRoute(
@@ -54,22 +61,22 @@ class AppNavigation {
   final List<AppRoute> routes = [
     AppRoute(
       name: RouteName.initial,
-      path: '/',
-      redirectCheck: (_, __) => '/home',
+      path: RouteName.initial.path,
+      redirectCheck: (_, __) => RouteName.home.path,
     ),
   ];
 
   final List<AppRoute> tabRoutes = [
     AppRoute(
       name: RouteName.home,
-      path: '/home',
+      path: RouteName.home.path,
       icon: Icons.home,
       transitionType: PageTransitionType.instant,
       builder: (_, __) => const HomeScreen(),
     ),
     AppRoute(
       name: RouteName.settings,
-      path: '/settings',
+      path: RouteName.settings.path,
       icon: Icons.settings,
       transitionType: PageTransitionType.instant,
       builder: (_, __) => const SettingsScreen(),
