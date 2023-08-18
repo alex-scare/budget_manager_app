@@ -1,6 +1,6 @@
+import 'package:budget_manager_app/core/navigation/app_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:budget_manager_app/core/navigation/app_navigation.dart';
 
 enum PageTransitionType {
   instant,

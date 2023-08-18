@@ -15,7 +15,7 @@ class SharedPreferencesService {
 
   Future<bool> get isLoggerEnabled async {
     final prefs = await _instance;
-    return prefs.getBool(_SharedPreferencesKey.isLoggerEnabled.name) ?? false;
+    return prefs.getBool(_SharedPreferencesKey.isLoggerEnabled.name) ?? true;
   }
 
   Future<void> setLoggerEnabled(bool value) async {

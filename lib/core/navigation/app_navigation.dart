@@ -1,10 +1,11 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:budget_manager_app/core/navigation/app_navigation_observers.dart';
 import 'package:budget_manager_app/core/navigation/app_route.dart';
 import 'package:budget_manager_app/core/navigation/tab_navigation_scaffold.dart';
 import 'package:budget_manager_app/features/home/home_screen.dart';
 import 'package:budget_manager_app/features/settings/settings_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 enum RouteName {
   initial,
@@ -28,12 +29,15 @@ class AppNavigation {
 
   GoRouter _createRouter() {
     return GoRouter(
+      debugLogDiagnostics: true,
       navigatorKey: globalRouteKey,
+      observers: [AppNavigationObserver()],
       initialLocation: '/',
       routes: [
         ...routes.map((route) => route.route(globalRouteKey)).toList(),
         ShellRoute(
           navigatorKey: tabRouteKey,
+          observers: [AppNavigationObserver()],
           routes: tabRoutes.map((route) => route.route(tabRouteKey)).toList(),
           builder: (context, state, child) {
             return TabNavigationScaffold(

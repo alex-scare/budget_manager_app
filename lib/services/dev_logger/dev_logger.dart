@@ -147,7 +147,8 @@ class DevLogger {
       output: MultiOutput(
         [
           FileOutput(file: file),
-          kDebugMode ? ConsoleOutput() : null,
+          ConsoleOutput(),
+          // kDebugMode ? ConsoleOutput() : null,
         ],
       ),
     );
