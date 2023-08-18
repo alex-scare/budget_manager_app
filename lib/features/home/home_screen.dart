@@ -5,7 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends HookConsumerWidget {
   const HomeScreen({super.key});
 
   @override
@@ -16,9 +16,9 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text(LocaleKey.featuresHomePageTitle).tr(),
       ),
-      body: StreamBuilder(
+      body: FutureBuilder(
         initialData: const [].cast<Transaction>(),
-        stream: transactions.listenAllTransactions(),
+        future: transactions.getAllTransactions(),
         builder: (context, snapshot) {
           return ListView.builder(
             itemCount: snapshot.data?.length ?? 0,

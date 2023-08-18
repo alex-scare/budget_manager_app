@@ -32,11 +32,11 @@ class IsarService {
 
   Future<Isar> _initIsar([File? file]) async {
     final dir = await FileSystemService.getDocumentsDirectory();
-    final isarDir = Directory('${dir.path}/$isarDirName.isar');
+    final isarDir = Directory('${dir.path}/$isarDirName');
+    final isarFilePath = '${isarDir.path}/$_isarFileName.isar';
 
     if (file != null) {
-      File('${isarDir.path}/$_isarFileName')
-          .writeAsBytesSync(file.readAsBytesSync());
+      File(isarFilePath).writeAsBytesSync(file.readAsBytesSync());
     }
 
     if (!isarDir.existsSync()) {
@@ -71,7 +71,7 @@ class IsarService {
 
     if (file == null) return;
 
-    (await isar).close();
+    await (await isar).close();
     isar = _initIsar(file);
   }
 }

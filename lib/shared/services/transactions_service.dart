@@ -11,4 +11,8 @@ class TransactionsService extends ChangeNotifier {
   Stream<List<Transaction>> listenAllTransactions() async* {
     yield* TransactionsRepository().listenAll();
   }
+
+  Future<List<Transaction>> getAllTransactions() async {
+    return TransactionsRepository().getAll();
+  }
 }
