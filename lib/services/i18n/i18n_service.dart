@@ -16,6 +16,7 @@ class I18nService {
     _configureLogger();
 
     supportedLocales = await _loadAvailableLocales();
+    await EasyLocalization.ensureInitialized();
   }
 
   static void _configureLogger() {
