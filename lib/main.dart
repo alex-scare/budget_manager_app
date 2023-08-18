@@ -2,6 +2,7 @@ import 'package:budget_manager_app/core/theme/theme.dart';
 import 'package:budget_manager_app/features/app/app.dart';
 import 'package:budget_manager_app/services/dev_logger/dev_logger.dart';
 import 'package:budget_manager_app/services/i18n/global_i18n_handler.dart';
+import 'package:budget_manager_app/services/i18n/i18n_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +20,7 @@ void main() async {
 
   SystemChrome.setSystemUIOverlayStyle(AppTheme.overlayStyleLight);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await I18nService.init();
   await EasyLocalization.ensureInitialized();
 
   runApp(const ProviderScope(child: GlobalI18nHandler(child: App())));
